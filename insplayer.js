@@ -8,7 +8,7 @@ var InsPlayer = {
 
 var InsVideo = function (el) {
     this.$video    = $(el);
-    this.$wrapper  = $(el).parent().addClass('paused');
+    this.$wrapper  = $(el).parent().removeClass().addClass('paused');
     this.$wrapper.css({"display": "inline-block", "position": "relative", "z-index": 100});
     this.$wrapper.append('<div class="video-controls video-controls--show"><button data-media="play-pause"></button></div>');
     this.$controls = this.$wrapper.find('.video-controls');
