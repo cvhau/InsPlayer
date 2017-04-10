@@ -13,7 +13,9 @@ var InsVideo = function (el) {
     this.$wrapper.append('<div class="video-controls video-controls--show"><button data-media="play-pause"></button></div>');
     this.$controls = this.$wrapper.find('.video-controls');
     //if width < 320 then set controlss btns border --> 20px 0 20px 40px
-    if(this.$video.width() < 250) {
+    if(this.$video.width() < 150) {
+        this.$wrapper.find('[data-media="play-pause"]').css({"border-width": "15px 0 15px 30px"});
+    }else if(this.$video.width() < 250) {
         this.$wrapper.find('[data-media="play-pause"]').css({"border-width": "20px 0 20px 40px"});
     }
 
@@ -61,16 +63,22 @@ InsVideo.prototype.attachEvents = function () {
     this.$video.on('play', function () {
         self.$wrapper.removeClass('paused').addClass('playing');
         playing = true;
-        if($(this).width() < 250) {
+        if($(this).width() < 150){
+            self.$wrapper.find('[data-media="play-pause"]').css({"border-width": "10px", "width": "30px", "height": "30px"});
+        }else if($(this).width() < 250) {
             self.$wrapper.find('[data-media="play-pause"]').css({"border-width": "13px", "width": "40px", "height": "40px"});
         }
     });
 
     this.$video.on('pause', function () {
         self.$wrapper.removeClass('playing').addClass('paused');
+        // show controls
+        self.$controls.addClass('video-controls--show');
         playing = false;
         clearTimeout(_t);
-        if($(this).width() < 250) {
+        if ($(this).width() < 150){
+            self.$wrapper.find('[data-media="play-pause"]').css({"border-width": "15px 0 15px 30px", "width": 0, "height": 0});
+        }else if($(this).width() < 250) {
             self.$wrapper.find('[data-media="play-pause"]').css({"border-width": "20px 0 20px 40px", "width": 0, "height": 0});
         }
     });
