@@ -1,6 +1,8 @@
 var InsPlayer = {
     start: function (video_selector) {
-        $(video_selector).each(function () {
+        if (typeof video_selector === "string")
+            video_selector = $(video_selector);
+        video_selector.each(function () {
             new InsVideo(this);
         })
     }
